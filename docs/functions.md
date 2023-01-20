@@ -149,9 +149,9 @@ func total($initial, ...%values){
 
 There are several built in functions that are provided by the interpreter, however these may be overriden by your executor. This documentation is for the default behaviour of these functions.
 
-### print(\[...values\])
+### print(\[...values\]) -> *NULL*
 
-Prints the string representation of every parameter passed to it to standard output, joined by spaces. If no arguments are provided, it simply prints a blank line. Each print statement creates a new line. Returns `NULL`.
+Prints the string representation of every parameter passed to it to standard output, joined by spaces. If no arguments are provided, it simply prints a blank line. Each print statement creates a new line.
 
 ```ska
 print("Str1", 2, x, "another string") # Prints "Str1 2 <function> another string"
@@ -161,7 +161,7 @@ func x {}
 
 > It's recommended for executors to overwrite this function and change its output, while keeping the same string concatenation functionality.
 
-### list(\[...values\])
+### list(\[...values\]) -> *iterable*
 
 Returns all of the values as an iterable that can be looped over.
 
@@ -173,7 +173,7 @@ for %val in myList {
 }
 ```
 
-### range(\<stop\>), range(\<start\>, \<stop\>, \[step = 1\])
+### range(\<stop\>) | range(\<start\>, \<stop\>, \[step = 1\]) -> *iterable*
 
 If one parameter is provided, return an iterable from 0 to `stop` (exclusive) in increments of 1. If more than two parameters are provided, loop from `start` (inclusive) to `stop` (exclusive) in increments of `step`.
 
@@ -185,7 +185,7 @@ for %i in range(10) {
 print(sum) # Prints "45"
 ```
 
-### type(\<value\>)
+### type(\<value\>) -> *string*
 
 Returns the type of the value as a string.
 
@@ -199,7 +199,7 @@ type(range(10)) # Returns "iterable"
 type(@root) # Returns "path"
 ```
 
-### exit(\[code\], \[value\])
+### exit(\[code\], \[value\]) -> *NULL*
 
 Immediately terminate script execution. If no parameters are provided, the script terminates execution with a return value of `NULL`, and an exit code of zero. 
 

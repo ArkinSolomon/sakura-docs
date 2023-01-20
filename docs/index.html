@@ -24,7 +24,7 @@
     <script>
       window.$docsify = {
         loadSidebar: true,
-        subMaxLevel: 3
+        subMaxLevel: 2
       };
     </script>
 
@@ -39,6 +39,9 @@
       integrity="sha512-aJJMLvtnLLgCuWpIGFpzALJNtWgmiOdY1Qhc1k20ZEi6WQvtoIGhhFa5z6+f05vRDb1KcCCs2ylwQgGKjgjtpg=="
       crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+    <script src="https://code.jquery.com/jquery-3.6.3.slim.min.js"
+      integrity="sha256-ZwqZIVdD3iXNyGHbSYdsmWP//UBokj2FHAxKuSBKDSo=" crossorigin="anonymous"></script>
+
     <script>
       Prism.plugins.customClass.prefix('prism--');
 
@@ -48,7 +51,6 @@
         'variable': /\$\w[\w|\d_]*/,
         'constant': /%\w[\w\d_]*/,
         'envvar': /@\w[\w\d_]*/,
-        'function': /\w(\w|\d)*(?=\n*\(.*\))/m,
         'builtin': [
           /print(?=\s*\()/,
           /list(?=\s*\()/,
@@ -56,13 +58,18 @@
           /exit(?=\s*\()/,
           /type(?=\s*\()/
         ],
+        'function': /\w(\w|\d)*(?=\n*\(.*\))/m,
+        'number': /\W(?:(?:[+-]?\d*\.?\d+e[+-]?\d+)|(?:(?:\d+)?\.\d+)|\d+)(?!\s*=)/,
         'operator': [
           /\+/,
           /\-/,
           /[<>=]=?/,
           /\.\.\./,
           /\*/,
-          /\//
+          /\//,
+          /&/,
+          /\|/,
+          /!/
         ],
         'punctuation': [
           /{/,
@@ -72,7 +79,6 @@
           /\)/
         ],
         'string': /".+"/m,
-        'number': /\W(?:(?:[+-]?\d*\.?\d+e[+-]?\d+)|(?:(?:\d+)?\.\d+)|\d+)(?!\s*=)/,
         'keyword': [
           /func/,
           /for/,
@@ -113,6 +119,7 @@
         -ms-overflow-style: none;
         scrollbar-width: none;
       }
+
       .sidebar::-webkit-scrollbar {
         display: none;
         /* Safari and Chrome */
@@ -126,7 +133,7 @@
         color: #951680
       }
 
-      .prism-envvar,
+      .prism--envvar,
       .prism--builtin {
         color: #8d1449;
       }

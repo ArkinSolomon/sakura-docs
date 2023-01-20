@@ -10,7 +10,7 @@ Commands operate on paths, which reperesents files or directories on a file syst
 
 ### The Root
 
-The root of a path is determined by the executor. The executor sets this root usually as a directory that is mostly used. All paths that start with a slash have root of this type. The root of a path may be changed by providing an expression, or environment variable. See the [PATH command](#PATH) for uses of this. By default, there is an environment variable `@root` which is the same as prefixing a path with a slash. So the path `@root/some/directory` is the same as `/some/directory`.
+The root of a path is determined by the executor. The executor sets this root. All paths that start with a slash will be prefixed with the root. The root of a path may be changed by providing an expression, or environment variable. See the [PATH command](#PATH) for uses of this. By default, there is an environment variable `@root` which is the same as prefixing a path with a slash. So the path `@root/some/directory` is the same as `/some/directory`.
 
 ### Dynamic Path Parts
 
@@ -32,7 +32,7 @@ WRITE "Some text!" TO $(myPath)
 This can be useful as paths can serve as roots, which can save typing.
 
 ```ska
-%rootDirectory = /some/directory/here
+%rootDirectory = PATH /some/directory/here
 MKDIRS $(rootDirectory)
 WRITE "File 1" TO $(rootDirectory)/file_1.txt
 WRITE "File 2" TO $(rootDirectory)/file_2.txt 
