@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no, viewport-fit=cover">
+    <meta name="description" content="">
+    <title>Sakura Docs</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css">
+
+    <style>
+      :root {
+        --theme-hue: 347;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app"></div>
+
+    <script>
+      window.$docsify = {
+        loadSidebar: true,
+        subMaxLevel: 3
+      };
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/js/docsify-themeable.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/zoom-image.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/docsify-prism@latest/dist/docsify-prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/custom-class/prism-custom-class.min.js"
+      integrity="sha512-aJJMLvtnLLgCuWpIGFpzALJNtWgmiOdY1Qhc1k20ZEi6WQvtoIGhhFa5z6+f05vRDb1KcCCs2ylwQgGKjgjtpg=="
+      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+      Prism.plugins.customClass.prefix('prism--');
+
+      // Note, this is a terrible syntax highligter, and so should refrain from using keywords nested, as it doesn't usually work too well
+      Prism.languages.ska = {
+        'comment': /#.*$/m,
+        'variable': /\$\w[\w|\d_]*/,
+        'constant': /%\w[\w\d_]*/,
+        'envvar': /@\w[\w\d_]*/,
+        'function': /\w(\w|\d)*(?=\n*\(.*\))/m,
+        'builtin': [
+          /print(?=\s*\()/,
+          /list(?=\s*\()/,
+          /range(?=\s*\()/,
+          /exit(?=\s*\()/,
+          /type(?=\s*\()/
+        ],
+        'operator': [
+          /\+/,
+          /\-/,
+          /[<>=]=?/,
+          /\.\.\./,
+          /\*/,
+          /\//
+        ],
+        'punctuation': [
+          /{/,
+          /}/,
+          /,/,
+          /\$?\(/,
+          /\)/
+        ],
+        'string': /".+"/m,
+        'number': /\W(?:(?:[+-]?\d*\.?\d+e[+-]?\d+)|(?:(?:\d+)?\.\d+)|\d+)(?!\s*=)/,
+        'keyword': [
+          /func/,
+          /for/,
+          /while/,
+          /if/,
+          /else\s+if/,
+          /else/,
+          /return/,
+          /continue/,
+          /break/,
+          /\s+in\s+/,
+          /NULL/,
+          /TRUE/,
+          /FALSE/
+        ],
+        'command': [
+          /MKDIRS/,
+          /MKDIR/,
+          /RENAME/,
+          /MOVE/,
+          /WRITE/,
+          /READ/,
+          /APPEND/,
+          /ISFILE/,
+          /ISDIR/,
+          /DELETE/,
+          /EXISTS/,
+          /PATH/,
+          /TO/,
+          /COPY/
+        ]
+      }
+    </script>
+
+    <style>
+      /* See https://stackoverflow.com/questions/16670931/hide-scroll-bar-but-while-still-being-able-to-scroll */
+      .sidebar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      .sidebar::-webkit-scrollbar {
+        display: none;
+        /* Safari and Chrome */
+      }
+
+      .prism--comment {
+        color: #7e707e;
+      }
+
+      .prism--string {
+        color: #951680
+      }
+
+      .prism-envvar,
+      .prism--builtin {
+        color: #8d1449;
+      }
+
+      .prism--operator,
+      .prism--punctuation {
+        color: #856a54;
+      }
+
+      .prism--number {
+        color: #621155;
+      }
+
+      .prism--variable {
+        color: #e32d9d;
+      }
+
+      .prism--constant {
+        color: #df1f49;
+      }
+
+      .prism--keyword {
+        color: #b2097f;
+      }
+
+      .prism--command {
+        color: #a91f3c
+      }
+    </style>
+  </body>
+
+</html>
