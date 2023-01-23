@@ -85,7 +85,7 @@ Check if a file is a file (as opposed to a directory). Allows its value to be st
 %isDir = ISFILE /some/file.txt
 ```
 
-> The `PATH`, `READ`, `EXISTS`, `ISDIR`, and `ISFILE` commands return values can only have it's values stored into a variable, they can not be used inline as a value.
+> The `PATH`, `READ`, `EXISTS`, `ISDIR`, and `ISFILE` commands return values can only have it's values stored into a variable (or directly returned), they can not be used inline as a value.
 
 ### MKDIR
 
@@ -166,6 +166,6 @@ Change the name of a file or directory. Slashes are not allowed in the new name.
 ```ska
 %original = PATH /some/file.txt
 RENAME $(original) TO "renamed_file.txt"
-%originalExists = EXISTS $(original)
-%newExists = EXISTS /some/file.txt
+%originalExists = EXISTS $(original) # False
+%newExists = EXISTS /some/renamed_file.txt # True
 ```
