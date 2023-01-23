@@ -24,7 +24,8 @@
     <script>
       window.$docsify = {
         loadSidebar: true,
-        subMaxLevel: 2
+        subMaxLevel: 2,
+        loadFooter: true
       };
     </script>
 
@@ -32,7 +33,7 @@
     <script src="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/js/docsify-themeable.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/zoom-image.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@alertbox/docsify-footer@1.0.0-0/dist/docsify-footer.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/docsify-prism@latest/dist/docsify-prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/custom-class/prism-custom-class.min.js"
@@ -125,6 +126,18 @@
         /* Safari and Chrome */
       }
 
+      footer {
+        color: #6e6e6e;
+        text-align: center;
+      }
+
+      footer > hr { 
+        margin-bottom: 4px;
+      }
+    </style>
+
+    <!--Prism styles-->
+    <style>
       .prism--comment {
         color: #7e707e;
       }
