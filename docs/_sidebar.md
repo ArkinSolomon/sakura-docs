@@ -1,6 +1,7 @@
 * [Home](/ "Sakura Docs")
 * [Commands & Paths](/commands.md)
 * [Variables](/variables.md)
+* [Operators](/operators.md)
 * [Branching](/branching.md)
 * [Loops & Iterables](/loops.md)
 * [Functions](/functions.md)

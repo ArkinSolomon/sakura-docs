@@ -22,7 +22,7 @@ To evaluate symbols normally, use `$()`. This will evaluate the expression and p
 
 ### PATH
 
-The PATH command evaluates a path, and allows you to store it into a variable.
+The `PATH` command evaluates a path, and allows you to store it into a variable.
 
 ```ska
 %myPath = PATH /some/file
@@ -52,11 +52,120 @@ if !basePathExists {
 WRITE "This file is in the folder: " + basePath TO $(basePath)
 ```
 
+### READ
+
+The `READ` command reads all the text from a file, and you can store its contents into a variable as a string.
+
+```ska
+%content = READ /some/file.txt
+print("The contents of file.txt is " + content)
+```
+
+### EXISTS
+
+The `EXISTS` command can determine if a file or directory exists, and allows it to be stored as a variable with a true boolean value if it exists, or false if it doesn't.
+
+```ska
+%exists = EXISTS /some/file.txt
+```
+
+### ISDIR
+
+Check if a file exists and is a directory. Allows its value to be stored as a variable with a true boolean value if it exists and is a directory, or false if it doesn't.
+
+```ska
+%isDir = ISDIR /some/directory
+```
+
+### ISFILE
+
+Check if a file is a file (as opposed to a directory). Allows its value to be stored as a variable with a true boolean value if it exists and is a file, or false if it doesn't.
+
+```ska
+%isDir = ISFILE /some/file.txt
+```
+
+> The `PATH`, `READ`, `EXISTS`, `ISDIR`, and `ISFILE` commands return values can only have it's values stored into a variable, they can not be used inline as a value.
+
+### MKDIR
+
+Create a directory at the specified path. Errors if the directory already exists, or if the parent directory does not exist.
+
+```ska
+MKDIR /some/new_folder
+```
+
+### MKDIRS
+
+Create a directory and all parent directories that do not exist. Errors if the directory exists.
+
+```ska
+MKDIR /some/new_folder/and_sub_folders
+```
+
 ### DELETE
 
-The delete command deletes a file or directory.
+The `DELETE` command deletes a file or directory.
 
 ```ska
 DELETE /some/directory
 DELETE /some/file.txt
+```
+
+### WRITE
+
+Write some text to a file, completely overwriting any content within it.
+
+```ska
+%path = PATH /some/file.txt
+WRITE "Some text!" TO $(path)
+%content = READ $(path)
+print(content) # Prints "Some text!"
+```
+
+### APPEND
+
+Append some text to a file, adding onto the content that is there already.
+
+```ska
+%path = PATH /some/file.txt
+WRITE "Hello" TO $(path)
+APPEND " World!" TO $(path)
+%content = READ $(path)
+print(content) # Prints "Hello World!"
+```
+
+### COPY
+
+The `COPY` command copies a file or directory from one place to another.
+
+```ska
+%original = PATH /some/file.txt
+%new = PATH /some/new_file.txt
+COPY $(original) TO $(new)
+%originalExists = EXISTS $(original) # True
+%newExists = EXISTS $(new) # True
+```
+
+### MOVE
+
+The `MOVE` command moves a file or directory from one place to another.
+
+```ska
+%original = PATH /some/file.txt
+%new = PATH /some/new_file.txt
+MOVE $(original) TO $(new)
+%originalExists = EXISTS $(original) # False
+%newExists = EXISTS $(new) # True
+```
+
+### RENAME
+
+Change the name of a file or directory. Slashes are not allowed in the new name. If you are attempting to move the folder use the [`MOVE` command](#move) instead.
+
+```ska
+%original = PATH /some/file.txt
+RENAME $(original) TO "renamed_file.txt"
+%originalExists = EXISTS $(original)
+%newExists = EXISTS /some/file.txt
 ```
