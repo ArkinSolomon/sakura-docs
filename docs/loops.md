@@ -18,7 +18,7 @@ print(myNum) # Prints 10
 
 ## For Loops
 
-For loops consist of the `for` keyword, followed by either a constant or variable declaration (a symbol prefixed by `$` or `%`, similar to how arguments are declared in [functions](`/functions`)), followed by the `in` keyword, followed by an iterable value, followed by code in braces (`{}`), which is called the "body" of the loop. The code runs, iterating over the iterable until the iterable completes, storing its value in the declared variable. Iterables can be provided as a result of a function or a [rest parameters](/functions#Rest-Parameters). If the iterable completes immediately, then the body of the loop never executes.
+For loops consist of the `for` keyword, followed by either a constant or variable declaration (a symbol prefixed by `$` or `%`, similar to how arguments are declared in [functions](/functions)), followed by the `in` keyword, followed by an iterable value, followed by code in braces (`{}`), which is called the "body" of the loop. The code runs, iterating over the iterable until the iterable completes, storing its value in the declared variable. Iterables can be provided as a result of a function or a [rest parameters](/functions#Rest-Parameters). If the iterable completes immediately, then the body of the loop never executes.
 
 ```ska
 for %val in list(1, 2, 3) {
