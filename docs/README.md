@@ -1,6 +1,6 @@
-# Sakura
+<img alt="Sakura" id="readme-logo" src="/images/logo_text.png"/>
 
-<img src="https://img.shields.io/badge/Lang Version-0.1.0--beta.1-green" />
+<p id="lang-ver">Official documentation for Sakura language version: <code>0.1.0-beta.1</code></p>
 
 ## About
 

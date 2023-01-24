@@ -6,10 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport"
       content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no, viewport-fit=cover">
-    <meta name="description" content="">
+    <meta name="description" content="Sakura programming language documentation">
+
     <title>Sakura Docs</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css">
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
 
     <style>
       :root {
@@ -21,7 +23,7 @@
   <body>
 
     <div id="app">
-      <!--GitHub corner: https://tholman.com/github-corners/, (automatically setup with docsify)-->
+      <!--GitHub corner: https://tholman.com/github-corners/, (automatically setup with Docsify)-->
       <a class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250"
           style="fill:#ce002b; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true">
           <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
@@ -74,7 +76,8 @@
         loadFooter: true,
         repo: 'ArkinSolomon/sakura-docs',
         auto2top: true,
-        name: 'Sakura'
+        name: 'Sakura',
+        logo: '/images/logo_text.png'
       };
     </script>
 
@@ -183,6 +186,25 @@
       .sidebar::-webkit-scrollbar {
         display: none;
         /* Safari and Chrome */
+      }
+
+      #readme-logo {
+        max-height: 95px;
+        display: block;
+
+        margin-top: 20px;
+        margin-bottom: 30px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      #lang-ver {
+        margin-top: 1em;
+        text-align: center;
+      }
+
+      a.app-name-link>img {
+        max-height: 32px;
       }
 
       footer {
