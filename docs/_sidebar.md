@@ -6,4 +6,5 @@
 * [Loops & Iterables](/loops.md)
 * [Functions](/functions.md)
 * [Conventions](/conventions.md)
+* [Interpreters](/interpreters.md)
 * [Formal Grammar](/formal-grammar.md)

@@ -4,7 +4,7 @@
 
 ## About
 
-Sakura is a dynamically-typed, interpreted, high-level, Turing-complete, programming language. It's designed for security, customization, and safety in mind. It is also designed to be easy to use for non-programmers, while giving enough control to perform more advanced tasks to users that require it. Sakura's main purpose is to interact with the file system, and provides features to make this simple.
+Sakura is a dynamically-typed, interpreted, high-level, Turing-complete, programming language. It's designed for package managers, built with security, customization, and safety in mind. It is also designed to be easy to use for non-programmers to use, while giving enough control to perform more advanced tasks to users that require it. Sakura's main purpose is to interact with the file system, and provides many features to help make this simpler.
 
 ## Running Sakura
 
