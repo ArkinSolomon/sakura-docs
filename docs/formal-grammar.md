@@ -4,7 +4,7 @@ The following represents Sakura's formal grammar, written in modified Extended B
 
 ```ebnf
 # Formal Grammar for Sakura 
-# Language version 0.1.0-beta.1
+# Language version 0.1.0-beta.2
 # 
 # Licensed under Apache 2.0 
 # Sakura Language (c) 2023 Arkin Solomon

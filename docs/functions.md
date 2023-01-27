@@ -149,9 +149,19 @@ func total($initial, ...%values){
 
 There are several built in functions that are provided by the interpreter, however these may be overriden by your executor. This documentation is for the default behaviour of these functions.
 
+### str(\<value\>) -> *string*
+
+Get the string representation of a value. For a string it will return its own value. For numbers, if the number is a whole number it will return it's integer value (`5` instead of `5.0` for example). For paths it will return the absolute path. For functions it will return "\<function\>" and for iterables it will return "\<iterable\>". Booleans will return "true" or "false".
+
+```ska
+%myBoolStr = str(TRUE) # "true"
+%myIntStr = str(5.0) # "5"
+%myFuncStr = str(print) # "<function>"
+```
+
 ### print(\[...values\]) -> *NULL*
 
-Prints the string representation of every parameter passed to it to standard output, joined by spaces. If no arguments are provided, it simply prints a blank line. Each print statement creates a new line.
+Prints the string representation of every parameter passed to it to standard output, joined by spaces. If no arguments are provided, it simply prints a blank line. Each print statement creates a new line. Prints out the value used by the [`str()`](#strvalue---string) function.
 
 ```ska
 print("Str1", 2, x, "another string") # Prints "Str1 2 <function> another string"
