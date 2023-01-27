@@ -82,7 +82,7 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-HL9DC8T2HW"></script>
     <script>
       // Cookie popup plugin
-      function popup(hook, vm) {
+      function popup(hook) {
 
         function init() {
           if (getCookie('ska_c_pref') == 'true') {
@@ -155,6 +155,26 @@
     </script>
 
     <script>
+
+      // Plugin to hide cookie-policy from the sidebar
+      function hideFromSideBar(hook) {
+        hook.doneEach(function () {
+          if (window.Docsify.dom.find('#cookie-policy-page') != null) {
+            const menuItem = window.Docsify.dom.find('aside > .sidebar-nav > ul > li > ul');
+            menuItem.innerHTML = null
+
+            if (menuItem.parentElement.classList.contains('active'))
+              menuItem.parentElement.classList.remove('active');
+            if (menuItem.classList.contains('active'))
+              menuItem.classList.remove('active');
+
+            menuItem.parentElement.querySelector('a').style.background = 'var(--sidebar-nav-pagelink-background)';
+          }
+        });
+      }
+    </script>
+
+    <script>
       window.$docsify = {
         loadSidebar: true,
         subMaxLevel: 2,
@@ -164,7 +184,8 @@
         name: 'Sakura',
         logo: '/images/logo_text.png',
         plugins: [
-          popup
+          popup,
+          hideFromSideBar
         ]
       };
     </script>
@@ -289,7 +310,11 @@
       a[href='#/formal-grammar'] {
         background-image: none !important;
       }
-
+      
+      #cookie-policy-first-heading {
+        margin-top: 3px;
+      }
+      
       #cookie-consent {
         display: none;
 
