@@ -109,6 +109,24 @@
     </script>
 
     <script>
+      // A simple EBNF syntax highlighter for custom use (note that the names are wrong, this lets us use our Sakura styling)
+      Prism.languages.ebnf = {
+        'comment': /#.*$/m,
+        'constant': [
+          /WHITESPACE/,
+          /NEWLINE/
+        ],
+        'string': /"(?:[^"\\]|\\.)*"/,
+        'operator': [
+          /\*/,
+          /\+/,
+          /\[/,
+          /\]/
+        ],
+        'command': /::=/
+      };
+    </script>
+    <script>
       Prism.plugins.customClass.prefix('prism--');
 
       // Note, this is a terrible syntax highligter, and so should refrain from using keywords nested, as it doesn't usually work too well
@@ -189,6 +207,11 @@
       .sidebar::-webkit-scrollbar {
         display: none;
         /* Safari and Chrome */
+      }
+
+      /* Manually hide links that don't have any sub points */
+      a[href='#/formal-grammar'] {
+        background-image: none !important;
       }
 
       #readme-logo {
