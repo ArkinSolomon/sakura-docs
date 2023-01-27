@@ -207,7 +207,7 @@
     <script>
       // A simple EBNF syntax highlighter for custom use (note that the names are wrong, this lets us use our Sakura styling)
       Prism.languages.ebnf = {
-        'comment': /#.*$/m,
+        'comment': /#(?!").*$/m,
         'constant': [
           /WHITESPACE/,
           /NEWLINE/
@@ -219,7 +219,10 @@
           /\[/,
           /\]/
         ],
-        'command': /::=/
+        'command': [
+          /::=/,
+          /\|/
+        ]
       };
     </script>
     <script>
@@ -310,11 +313,11 @@
       a[href='#/formal-grammar'] {
         background-image: none !important;
       }
-      
+
       #cookie-policy-first-heading {
         margin-top: 3px;
       }
-      
+
       #cookie-consent {
         display: none;
 
