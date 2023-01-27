@@ -38,7 +38,7 @@ WRITE "File 1" TO $(rootDirectory)/file_1.txt
 WRITE "File 2" TO $(rootDirectory)/file_2.txt 
 ```
 
-It also can be used for dynamically setting directories (like so).
+It also can be used for dynamically creating directories (like so).
 
 ```ska
 %basePath = PATH /folder_1
