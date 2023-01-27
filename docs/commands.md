@@ -38,18 +38,18 @@ WRITE "File 1" TO $(rootDirectory)/file_1.txt
 WRITE "File 2" TO $(rootDirectory)/file_2.txt 
 ```
 
-It also can be used for dynamically creating directories (like so).
+It also can be used for setting directories dependent on other conditions.
 
 ```ska
-%basePath = PATH /folder_1
+$basePath = PATH /folder_1
 %basePathExists = EXISTS $(basePath)
 
 if !basePathExists {
-  %basePath = PATH /folder_2
+  basePath = PATH /folder_2
   MKDIR $(basePath)
 }
 
-WRITE "This file is in the folder: " + basePath TO $(basePath)
+WRITE "new file" TO $(basePath)/new_file.txt
 ```
 
 ### READ
@@ -100,7 +100,7 @@ MKDIR /some/new_folder
 Create a directory and all parent directories that do not exist. Errors if the directory exists.
 
 ```ska
-MKDIR /some/new_folder/and_sub_folders
+MKDIRS /some/new_folder/and_sub_folders
 ```
 
 ### DELETE
@@ -117,7 +117,7 @@ DELETE /some/file.txt
 Write some text to a file, completely overwriting any content within it.
 
 ```ska
-%path = PATH /some/file.txt
+%path = PATH /file.txt
 WRITE "Some text!" TO $(path)
 %content = READ $(path)
 print(content) # Prints "Some text!"
@@ -128,7 +128,7 @@ print(content) # Prints "Some text!"
 Append some text to a file, adding onto the content that is there already.
 
 ```ska
-%path = PATH /some/file.txt
+%path = PATH /file.txt
 WRITE "Hello" TO $(path)
 APPEND " World!" TO $(path)
 %content = READ $(path)
@@ -140,11 +140,13 @@ print(content) # Prints "Hello World!"
 The `COPY` command copies a file or directory from one place to another.
 
 ```ska
-%original = PATH /some/file.txt
-%new = PATH /some/new_file.txt
+%original = PATH /file.txt
+%new = PATH /new_file.txt
 COPY $(original) TO $(new)
-%originalExists = EXISTS $(original) # True
-%newExists = EXISTS $(new) # True
+%originalExists = EXISTS $(original)
+%newExists = EXISTS $(new)
+print(originalExists) # Prints "true"
+print(newExists) # Prints "true"
 ```
 
 ### MOVE
@@ -152,11 +154,13 @@ COPY $(original) TO $(new)
 The `MOVE` command moves a file or directory from one place to another.
 
 ```ska
-%original = PATH /some/file.txt
-%new = PATH /some/new_file.txt
+%original = PATH /file.txt
+%new = PATH /new_file.txt
 MOVE $(original) TO $(new)
-%originalExists = EXISTS $(original) # False
-%newExists = EXISTS $(new) # True
+%originalExists = EXISTS $(original)
+%newExists = EXISTS $(new)
+print(originalExists) # Prints "false"
+print(newExists) # Prints "true"
 ```
 
 ### RENAME
@@ -164,8 +168,10 @@ MOVE $(original) TO $(new)
 Change the name of a file or directory. Slashes are not allowed in the new name. If you are attempting to move the folder use the [`MOVE` command](#move) instead.
 
 ```ska
-%original = PATH /some/file.txt
+%original = PATH /file.txt
 RENAME $(original) TO "renamed_file.txt"
-%originalExists = EXISTS $(original) # False
-%newExists = EXISTS /some/renamed_file.txt # True
+%originalExists = EXISTS $(original)
+%newExists = EXISTS /renamed_file.txt
+print(originalExists) # Prints "false"
+print(newExists) # Prints "true"
 ```
