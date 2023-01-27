@@ -22,6 +22,8 @@ To evaluate symbols normally, use `$()`. This will evaluate the expression and p
 
 ### PATH
 
+**Requires no permissions**
+
 The `PATH` command evaluates a path, and allows you to store it into a variable.
 
 ```ska
@@ -54,6 +56,8 @@ WRITE "new file" TO $(basePath)/new_file.txt
 
 ### READ
 
+**Requires READ permissions**
+
 The `READ` command reads all the text from a file, and you can store its contents into a variable as a string.
 
 ```ska
@@ -63,6 +67,8 @@ print("The contents of file.txt is " + content)
 
 ### EXISTS
 
+**Requires READ permissions**
+
 The `EXISTS` command can determine if a file or directory exists, and allows it to be stored as a variable with a true boolean value if it exists, or false if it doesn't.
 
 ```ska
@@ -71,6 +77,8 @@ The `EXISTS` command can determine if a file or directory exists, and allows it 
 
 ### ISDIR
 
+**Requires READ permissions**
+
 Check if a file exists and is a directory. Allows its value to be stored as a variable with a true boolean value if it exists and is a directory, or false if it doesn't.
 
 ```ska
@@ -78,6 +86,8 @@ Check if a file exists and is a directory. Allows its value to be stored as a va
 ```
 
 ### ISFILE
+
+**Requires READ permissions**
 
 Check if a file is a file (as opposed to a directory). Allows its value to be stored as a variable with a true boolean value if it exists and is a file, or false if it doesn't.
 
@@ -89,6 +99,8 @@ Check if a file is a file (as opposed to a directory). Allows its value to be st
 
 ### MKDIR
 
+**Requires WRITE permissions**
+
 Create a directory at the specified path. Errors if the directory already exists, or if the parent directory does not exist.
 
 ```ska
@@ -96,6 +108,8 @@ MKDIR /some/new_folder
 ```
 
 ### MKDIRS
+
+**Requires WRITE permissions**
 
 Create a directory and all parent directories that do not exist. Errors if the directory exists.
 
@@ -105,6 +119,8 @@ MKDIRS /some/new_folder/and_sub_folders
 
 ### DELETE
 
+**Requires WRITE permissions**
+
 The `DELETE` command deletes a file or directory.
 
 ```ska
@@ -113,6 +129,8 @@ DELETE /some/file.txt
 ```
 
 ### WRITE
+
+**Requires WRITE permissions**
 
 Write some text to a file, completely overwriting any content within it.
 
@@ -125,6 +143,8 @@ print(content) # Prints "Some text!"
 
 ### APPEND
 
+**Requires WRITE permissions**
+
 Append some text to a file, adding onto the content that is there already.
 
 ```ska
@@ -136,6 +156,8 @@ print(content) # Prints "Hello World!"
 ```
 
 ### COPY
+
+**Requires READ and WRITE permissions**
 
 The `COPY` command copies a file or directory from one place to another.
 
@@ -151,6 +173,8 @@ print(newExists) # Prints "true"
 
 ### MOVE
 
+**Requires READ and WRITE permissions**
+
 The `MOVE` command moves a file or directory from one place to another.
 
 ```ska
@@ -164,6 +188,8 @@ print(newExists) # Prints "true"
 ```
 
 ### RENAME
+
+**Requires READ and WRITE permissions**
 
 Change the name of a file or directory. Slashes are not allowed in the new name. If you are attempting to move the folder use the [`MOVE` command](#move) instead.
 
