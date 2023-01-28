@@ -92,7 +92,7 @@ Check if a file exists and is a directory. Allows its value to be stored as a va
 Check if a file is a file (as opposed to a directory). Allows its value to be stored as a variable with a true boolean value if it exists and is a file, or false if it doesn't.
 
 ```ska
-%isDir = ISFILE /some/file.txt
+%isFile = ISFILE /some/file.txt
 ```
 
 > The `PATH`, `READ`, `EXISTS`, `ISDIR`, and `ISFILE` commands return values can only have it's values stored into a variable (or directly returned), they can not be used inline as a value.
