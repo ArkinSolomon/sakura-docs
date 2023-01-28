@@ -6,22 +6,29 @@ Commands are an essential part of Sakura, and how Sakura interacts with the file
 
 ### Basics
 
-Commands operate on paths, which reperesents files or directories on a file system. Paths are symbols that are seperated by forward slashes. For example: `/some/directory`. Is parsed to pointing to the (potentially non-existent) file or directory at `/some/directory` within the root. Paths will automatically be parsed to the proper file system reperesentation. For instance, evaluating `/directory/some_file.txt` will be parsed to `C:\directory\some_file.txt` on Windows machines, and `/directory/some_file.txt` on Linux/MacOS machines. If a portion of the path has a space in it, it needs to be wrapped in quotes. For instance: `/"some directory"/"a file.txt"`. These quotes are not permited to have slashes within them.
+Commands operate on paths, which reperesents files or directories on a file system. Paths are symbols that are seperated by forward slashes. For example: `/some/directory`. Is parsed to pointing to the (potentially non-existent) file or directory at `/some/directory` within the root (more on the root in a bit). Paths will automatically be parsed to the proper file system reperesentation. For instance, evaluating `/directory/some_file.txt` will be parsed to `C:\directory\some_file.txt` on Windows machines, and `/directory/some_file.txt` on Linux/MacOS machines. Symbols within paths are parsed as plaintext. If a portion of the path has a space or a semicolon in it, it needs to be wrapped in quotes. For instance: `/"some; directory"/"a file.txt"`. These quotes are not permited to have slashes within them. 
 
-### The Root
+### Permissions
 
-The root of a path is determined by the executor. The executor sets this root. All paths that start with a slash will be prefixed with the root. The root of a path may be changed by providing an expression, or environment variable. See the [PATH command](#PATH) for uses of this. By default, there is an environment variable `@root` which is the same as prefixing a path with a slash. So the path `@root/some/directory` is the same as `/some/directory`.
+Performing operations on files require permissions granted by the executor. These 
 
-### Dynamic Path Parts
+### The Root & Relative Paths
 
-When using paths, a lot of symbols are not parsed normally, reserved charachters (like parentheses, braces, etc.) are parsed as text. Slashes act as path seperators, in this case. An exception to this rule is the first part of the path, which if it is an enviornment variable, it will be evaluated (and is expected to be a path). For instance evaluating `@root/@root` within an executor which sets the root to `/user/documents/` evaluates to `/user/documents/@root`.
+All paths are relative to another path. Paths are prefixed with a [`path`](/variables#path) data type, which is usually an environment variable. For instance, if your executor provides a `@resources` environment variable, the directory within resources, `subdirectory`, can be referenced by the path `@resources/subdirectory`. All executors provide a "root" path, which is set to the `@root` environment variable. This is typically the main path that your script will be dealing with, as such, the `@root` is implicit before a path. So the path `@root/some/directory` is the same as typing `/some/directory`. According to [convention](/conventions#commands-amp-paths) the root should never be explicitly stated. Enviorment variables are only parsed when they are prefixes, For instance, parsing the path `@root/@root` in a context where the root is set to `/home` will evaluate to `/home/@root`, not `/home/home`. Prefixes must be of type `path`.
 
-To evaluate symbols normally, use `$()`. This will evaluate the expression and place it in the path literal. The expression must evaluate to a type of string, and can not contain slashes. Paths must either start with a `/`, an expression that evaluates to a path (wrapped in `$()`), or an environment variable of type `PATH`. For instance:
+The `.` and `..` symbols can be used within a path to reference the current directory and the parent directory respectively. These symbols can not be prefixed. If you would like to reference the parent of the root, for instance, you would use the path `/..`. Note that the `.` symbol, although supported, does not have much of a use, it effectively does nothing. For instance, the path `/directory/./././file.txt` is the same as `/directory/file.txt`.
+
+### Dynamic Parts
+
+It's important to note that only environment variables can be prefixed without a dynamic call. Custom defined functions require the path to be wrapped in `$()`. When this is in a path, any value within the parentheses will be evaluated. Path prefixes (that is, dynamic path parts or environment variables before the initial slash) **MUST** be of type path. For instance, in the following example, both `myPath` and `myOtherPath` evaluate to the same variable:
 
 ```ska
-%myStr = "subdir"
-%myPath = PATH /directory/$(myStr)/myFile # Evaluates to @root/directory/subdir/myFile
+%myBasePath = PATH /folder
+%myPath = PATH $(myPath)/file.txt
+%myOtherPath = PATH /folder/file.txt
 ```
+
+When using a dynamic part path within a path, it will be coerced to a string, except for paths. Recall that paths are always relative to something. Paths can be relative to the root, or to other paths, which are in turn relative to the root, and the root is absolute. For this reason, inserting a path into another path will throw an error.
 
 ## Commands
 
@@ -36,7 +43,7 @@ The `PATH` command evaluates a path, and allows you to store it into a variable.
 WRITE "Some text!" TO $(myPath)
 ```
 
-This can be useful as paths can serve as roots, which can save typing.
+This can be useful as paths can serve as the base for other paths, which can save typing.
 
 ```ska
 %rootDirectory = PATH /some/directory/here

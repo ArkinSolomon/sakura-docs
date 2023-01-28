@@ -149,66 +149,6 @@ func total($initial, ...%values){
 
 There are several built in functions that are provided by the interpreter, however these may be overriden by your executor. This documentation is for the default behaviour of these functions.
 
-### str(\<value\>) -> *string*
-
-Get the string representation of a value. For a string it will return its own value. For numbers, if the number is a whole number it will return it's integer value (`5` instead of `5.0` for example). For paths it will return the absolute path. For functions it will return "\<function\>" and for iterables it will return "\<iterable\>". Booleans will return "true" or "false".
-
-```ska
-%myBoolStr = str(TRUE) # "true"
-%myIntStr = str(5.0) # "5"
-%myFuncStr = str(print) # "<function>"
-```
-
-### print(\[...values\]) -> *NULL*
-
-Prints the string representation of every parameter passed to it to standard output, joined by spaces. If no arguments are provided, it simply prints a blank line. Each print statement creates a new line. Prints out the value used by the [`str()`](#strvalue---string) function.
-
-```ska
-print("Str1", 2, x, "another string") # Prints "Str1 2 <function> another string"
-
-func x {}
-```
-
-> It's recommended for executors to overwrite this function and change its output, while keeping the same string concatenation functionality.
-
-### list(\[...values\]) -> *iterable*
-
-Returns all of the values as an iterable that can be looped over.
-
-```ska
-%myList = list("A string", 7)
-
-for %val in myList {
-  print(val) # Prints "A string" and then "7" on a new line
-}
-```
-
-### range(\<stop\>) | range(\<start\>, \<stop\>, \[step = 1\]) -> *iterable*
-
-If one parameter is provided, return an iterable from 0 to `stop` (exclusive) in increments of 1. If more than two parameters are provided, loop from `start` (inclusive) to `stop` (exclusive) in increments of `step`.
-
-```ska
-$sum = 0
-for %i in range(10) {
-    sum = sum + i
-}
-print(sum) # Prints "45"
-```
-
-### type(\<value\>) -> *string*
-
-Returns the type of the value as a string.
-
-```ska
-type("foobar") # Returns "string"
-type(10) # Returns "number"
-type(FALSE) # Returns "boolean"
-type(NULL) # Returns "null"
-type(print) # Returns "function"
-type(range(10)) # Returns "iterable"
-type(@root) # Returns "path"
-```
-
 ### exit(\[code\], \[value\]) -> *NULL*
 
 Immediately terminate script execution. If no parameters are provided, the script terminates execution with a return value of `NULL`, and an exit code of zero. 
@@ -225,6 +165,84 @@ exit(30, "Error :(") # Terminate with exit code 30 with the reason "Error :("
 ```
 
 > If `code` is provided, it will be converted to a byte value internally, so executing with a decimal value, or a value outside of the range -127 to 127 (inclusive) may produce undefined behavior.
+
+### hasReadPerms(\<path\>) -> *boolean*
+
+Determine if the provided path has read permissions. Returns true if the path has read permissions, or false otherwise.
+
+```ska
+%myFile = PATH /unreadable_dir/file.txt
+print(hasReadPerms(myFile)) # Prints "false"
+```
+
+### hasWritePerms(\<path\>) -> *boolean*
+
+Determine if the provided path has write permissions. Returns true if the path has write permissions, or false otherwise.
+
+```ska
+%myFile = PATH /unwriteable_dir/file.txt
+print(hasWritePerms(myFile)) # Prints "false"
+```
+
+### list(\[...values\]) -> *iterable*
+
+Returns all of the values as an iterable that can be looped over.
+
+```ska
+%myList = list("A string", 7)
+
+for %val in myList {
+  print(val) # Prints "A string" and then "7" on a new line
+}
+```
+
+### print(\[...values\]) -> *NULL*
+
+Prints the string representation of every parameter passed to it to standard output, joined by spaces. If no arguments are provided, it simply prints a blank line. Each print statement creates a new line. Prints out the value used by the [`str()`](#strvalue---string) function.
+
+```ska
+print("Str1", 2, x, "another string") # Prints "Str1 2 <function> another string"
+
+func x {}
+```
+
+> It's recommended for executors to overwrite this function and change its output, while keeping the same string concatenation functionality.
+
+### range(\<stop\>) | range(\<start\>, \<stop\>, \[step = 1\]) -> *iterable*
+
+If one parameter is provided, return an iterable from 0 to `stop` (exclusive) in increments of 1. If more than two parameters are provided, loop from `start` (inclusive) to `stop` (exclusive) in increments of `step`.
+
+```ska
+$sum = 0
+for %i in range(10) {
+    sum = sum + i
+}
+print(sum) # Prints "45"
+```
+
+### str(\<value\>) -> *string*
+
+Get the string representation of a value. For a string it will return its own value. For numbers, if the number is a whole number it will return it's integer value (`5` instead of `5.0` for example). For paths it will return the absolute path. For functions it will return "\<function\>" and for iterables it will return "\<iterable\>". Booleans will return "true" or "false".
+
+```ska
+%myBoolStr = str(TRUE) # "true"
+%myIntStr = str(5.0) # "5"
+%myFuncStr = str(print) # "<function>"
+```
+
+### type(\<value\>) -> *string*
+
+Returns the type of the value as a string.
+
+```ska
+type("foobar") # Returns "string"
+type(10) # Returns "number"
+type(FALSE) # Returns "boolean"
+type(NULL) # Returns "null"
+type(print) # Returns "function"
+type(range(10)) # Returns "iterable"
+type(@root) # Returns "path"
+```
 
 ## Creating Executor Functions
 
