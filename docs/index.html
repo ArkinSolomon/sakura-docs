@@ -27,8 +27,8 @@
       <p>This site uses cookies to collect analytics information. View the <a href="/cookie-policy">cookie policy</a>.
       </p>
       <div id="cookie-button-container">
-        <button id="opt-out-button">No thanks</button>
         <button id="opt-in-button">Allow</button>
+        <button id="opt-out-button">No thanks</button>
       </div>
     </div>
     <div id="app">
@@ -328,8 +328,11 @@
         z-index: 100;
 
         width: 20%;
-        height: 25%;
         min-width: 500px;
+
+        height: 25%;
+        min-height: fit-content;
+        max-height: 185px;
 
         right: 10px;
         bottom: 10px;
@@ -350,7 +353,6 @@
         text-decoration: underline;
         color: inherit;
       }
-
 
       @keyframes fade-out {
         from {
@@ -384,7 +386,8 @@
         color: #575757;
         padding: 0;
         margin: 0;
-        display: block;
+
+        word-wrap:break-word;
       }
 
       #cookie-button-container {
@@ -392,8 +395,12 @@
         margin-left: auto;
         margin-right: auto;
 
+        min-height: fit-content;
+
         min-width: fit-content;
         max-width: 75%;
+
+        display: block;
       }
 
       #cookie-button-container>button {
@@ -434,16 +441,40 @@
       }
 
       /* Mobile cookie consent */
-      @media (max-width: 600px) {
+      @media (max-width: 860px) {
 
         #cookie-consent {
-          width: 100vw;
+          min-width: 0px;
+          width: 100%;
+          max-width: 100%;
 
-          min-height: fit-content;
-          height: 25%;
+          min-height: 230px;
+          height: fit-content;
 
-          bottom: 0;
-          right: 0;
+          bottom: -1px;  
+          right: auto;
+
+          border-radius: 0;
+        }
+
+        #cookie-button-container>button {
+          display: block;
+          float: none;
+
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        #opt-in-button {
+          margin-bottom: 15px;
+        }
+
+        #opt-out-button {
+          margin-bottom: 1em;
+        }
+
+        #cookie-button-container {
+          max-width: 100vw;
         }
       }
 
