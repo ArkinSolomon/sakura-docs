@@ -6,6 +6,18 @@
 
 Sakura is a dynamically-typed, interpreted, high-level, Turing-complete, programming language. It's designed for package managers, built with security, customization, and safety in mind. It is also designed to be easy to use for non-programmers to use, while giving enough control to perform more advanced tasks to users that require it. Sakura's main purpose is to interact with the file system, and provides many features to help make this simpler.
 
+## Advantages of Sakura
+
+### Security
+
+Sakura can restrict access to files or directories for scripts, only allowing a script to execute within the set parameters. This lets you run scripts without being worried about the installer modifying files. Also thanks to the [saftey](#saftey) of Sakura, you can checkup on the files that are modified.
+
+### Saftey
+
+### Customization
+
+### Simplicity
+
 ## Running Sakura
 
 The main purpose of Sakura is to be run on user devices by other programs (known as *executors*) using a Sakura *interpreter*. Interpreters are what actually parse and run the code, whereas executors instruct interperters to run a certain script within certain parameters. Since a lot of Sakura can be customized by the executor, it's important that you check with the executor your script is intended for when writing code, and use a testing mechanism provided by your executor. Some interpreters, however, do provide a command line tool to run your scripts, so these can be used as well on your local machine.
