@@ -16,7 +16,12 @@ The root of a path is determined by the executor. The executor sets this root. A
 
 When using paths, a lot of symbols are not parsed normally, reserved charachters (like parentheses, braces, etc.) are parsed as text. Slashes act as path seperators, in this case. An exception to this rule is the first part of the path, which if it is an enviornment variable, it will be evaluated (and is expected to be a path). For instance evaluating `@root/@root` within an executor which sets the root to `/user/documents/` evaluates to `/user/documents/@root`.
 
-To evaluate symbols normally, use `$()`. This will evaluate the expression and place it in the path literal. The expression must evaluate to a type of string, and can not contain slashes. Paths must either start with a `/`, an expression that evaluates to a path (wrapped in `$()`), or an environment variable of type `PATH`.
+To evaluate symbols normally, use `$()`. This will evaluate the expression and place it in the path literal. The expression must evaluate to a type of string, and can not contain slashes. Paths must either start with a `/`, an expression that evaluates to a path (wrapped in `$()`), or an environment variable of type `PATH`. For instance:
+
+```ska
+%myStr = "subdir"
+%myPath = PATH /directory/$(myStr)/myFile # Evaluates to @root/directory/subdir/myFile
+```
 
 ## Commands
 
