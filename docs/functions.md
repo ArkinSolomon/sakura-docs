@@ -166,22 +166,22 @@ exit(30, "Error :(") # Terminate with exit code 30 with the reason "Error :("
 
 > If `code` is provided, it will be converted to a byte value internally, so executing with a decimal value, or a value outside of the range -127 to 127 (inclusive) may produce undefined behavior.
 
-### hasReadPerms(\<path\>) -> *boolean*
+### canRead(\<path\>) -> *boolean*
 
 Determine if the provided path has read permissions. Returns true if the path has read permissions, or false otherwise.
 
 ```ska
 %myFile = PATH /unreadable_dir/file.txt
-print(hasReadPerms(myFile)) # Prints "false"
+print(canRead(myFile)) # Prints "false"
 ```
 
-### hasWritePerms(\<path\>) -> *boolean*
+### canWrite(\<path\>) -> *boolean*
 
 Determine if the provided path has write permissions. Returns true if the path has write permissions, or false otherwise.
 
 ```ska
 %myFile = PATH /unwriteable_dir/file.txt
-print(hasWritePerms(myFile)) # Prints "false"
+print(canWrite(myFile)) # Prints "false"
 ```
 
 ### list(\[...values\]) -> *iterable*

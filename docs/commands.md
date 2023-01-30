@@ -10,7 +10,7 @@ Commands operate on paths, which reperesents files or directories on a file syst
 
 ### Permissions
 
-Performing operations on files require permissions granted by the executor. These 
+Performing operations on files require permissions granted by the executor. These permissions can be checked using the [`canRead()`](/functions#canreadltpathgt-gt-boolean) and [`canWrite()`](/functions#canwriteltpathgt-gt-boolean) functions. Unauthorized attempts on a file will result in an error, and cause the program to be terminated immedatly, with all operations that occur before the attempted operation being undone.
 
 ### The Root & Relative Paths
 
@@ -34,9 +34,7 @@ When using a dynamic part path within a path, it will be coerced to a string, ex
 
 ### PATH
 
-**Requires no permissions**
-
-The `PATH` command evaluates a path, and allows you to store it into a variable.
+The `PATH` command evaluates a path, and allows you to store it into a variable. No permissions required.
 
 ```ska
 %myPath = PATH /some/file
@@ -48,6 +46,7 @@ This can be useful as paths can serve as the base for other paths, which can sav
 ```ska
 %rootDirectory = PATH /some/directory/here
 MKDIRS $(rootDirectory)
+
 WRITE "File 1" TO $(rootDirectory)/file_1.txt
 WRITE "File 2" TO $(rootDirectory)/file_2.txt 
 ```
@@ -68,9 +67,9 @@ WRITE "new file" TO $(basePath)/new_file.txt
 
 ### READ
 
-**Requires READ permissions**
+Read all of the text from the `file`, and return it as a string. Requires read permissions on `file`.
 
-The `READ` command reads all the text from a file, and you can store its contents into a variable as a string.
+`READ [file]`
 
 ```ska
 %content = READ /some/file.txt
@@ -79,9 +78,9 @@ print("The contents of file.txt is " + content)
 
 ### EXISTS
 
-**Requires READ permissions**
+Determine if the file or directory `file`. Also allows it to be stored as a variable with a true boolean value if it exists, or false if it doesn't. Requires READ permissions on `file`.
 
-The `EXISTS` command can determine if a file or directory exists, and allows it to be stored as a variable with a true boolean value if it exists, or false if it doesn't.
+`EXISTS [file]`
 
 ```ska
 %exists = EXISTS /some/file.txt
@@ -89,9 +88,9 @@ The `EXISTS` command can determine if a file or directory exists, and allows it 
 
 ### ISDIR
 
-**Requires READ permissions**
+Check if `dir` exists and is a directory (as opposed to a file). Allows its value to be stored as a variable with a true boolean value if it exists and is a directory, or false if it doesn't. Requires READ permissions on `dir`.
 
-Check if a file exists and is a directory. Allows its value to be stored as a variable with a true boolean value if it exists and is a directory, or false if it doesn't.
+`ISDIR [dir]`
 
 ```ska
 %isDir = ISDIR /some/directory
@@ -99,9 +98,9 @@ Check if a file exists and is a directory. Allows its value to be stored as a va
 
 ### ISFILE
 
-**Requires READ permissions**
+Check if `file` exists and is a file (as opposed to a directory). Allows its value to be stored as a variable with a true boolean value if it exists and is a file, or false if it doesn't. Requires READ permissions on `file`.
 
-Check if a file is a file (as opposed to a directory). Allows its value to be stored as a variable with a true boolean value if it exists and is a file, or false if it doesn't.
+`ISFILE [file]` 
 
 ```ska
 %isFile = ISFILE /some/file.txt
@@ -111,9 +110,9 @@ Check if a file is a file (as opposed to a directory). Allows its value to be st
 
 ### MKDIR
 
-**Requires WRITE permissions**
+Create a directory at `dir`. Errors if the directory already exists, or if the parent directory does not exist. Requires WRITE permissions on `dir`.
 
-Create a directory at the specified path. Errors if the directory already exists, or if the parent directory does not exist.
+`MKDIR [dir]`
 
 ```ska
 MKDIR /some/new_folder
@@ -121,9 +120,9 @@ MKDIR /some/new_folder
 
 ### MKDIRS
 
-**Requires WRITE permissions**
+Create the directory `dir` and all parent directories that do not exist. Errors if the directory exists. Requires WRITE permissions on `dir`.
 
-Create a directory and all parent directories that do not exist. Errors if the directory exists.
+`MKDIRS [dir]`
 
 ```ska
 MKDIRS /some/new_folder/and_sub_folders
@@ -131,9 +130,9 @@ MKDIRS /some/new_folder/and_sub_folders
 
 ### DELETE
 
-**Requires WRITE permissions**
+Delete the file or directory `file`. Requires WRITE permissions on `file`.
 
-The `DELETE` command deletes a file or directory.
+`DELTE [file]`
 
 ```ska
 DELETE /some/directory
@@ -142,9 +141,9 @@ DELETE /some/file.txt
 
 ### WRITE
 
-**Requires WRITE permissions**
+Write some text to a file, completely overwriting any content within it. `content` will be converted to a string. Requires WRITE permissions on `file`.
 
-Write some text to a file, completely overwriting any content within it.
+`WRITE [content] TO [file]`
 
 ```ska
 %path = PATH /file.txt
@@ -155,9 +154,9 @@ print(content) # Prints "Some text!"
 
 ### APPEND
 
-**Requires WRITE permissions**
+Appends some text to a file, adding onto the content that is there already. `content` will be converted to a string. Requires WRITE permissions on `file`.
 
-Append some text to a file, adding onto the content that is there already.
+`APPEND [content] TO [file]`
 
 ```ska
 %path = PATH /file.txt
@@ -171,45 +170,57 @@ print(content) # Prints "Hello World!"
 
 **Requires READ and WRITE permissions**
 
-The `COPY` command copies a file or directory from one place to another.
+Copies a file or directory from one place to another. Requires READ permissions on `file1`, and WRITE permissions on `file2`.
+
+`COPY [file1] TO [file2]`
 
 ```ska
 %original = PATH /file.txt
 %new = PATH /new_file.txt
+
 COPY $(original) TO $(new)
+
 %originalExists = EXISTS $(original)
 %newExists = EXISTS $(new)
+
 print(originalExists) # Prints "true"
 print(newExists) # Prints "true"
 ```
 
 ### MOVE
 
-**Requires READ and WRITE permissions**
+Moves the file or directory `file1` to `file2`. Requires READ and WRITE permissions on `file1`, and WRITE permissions on `file2`.
 
-The `MOVE` command moves a file or directory from one place to another.
+`MOVE [file1] TO [file2]`
 
 ```ska
 %original = PATH /file.txt
 %new = PATH /new_file.txt
+
 MOVE $(original) TO $(new)
+
 %originalExists = EXISTS $(original)
 %newExists = EXISTS $(new)
+
 print(originalExists) # Prints "false"
 print(newExists) # Prints "true"
 ```
 
 ### RENAME
 
-**Requires READ and WRITE permissions**
+Change the name of a file or directory. `newName` is the new name of the file, and can not contain strings. Slashes are not allowed in the new name. Requires READ permissions on `file`, and WRITE permissions on the target name (equivalent to `file/../newName`).
 
-Change the name of a file or directory. Slashes are not allowed in the new name. If you are attempting to move the folder use the [`MOVE` command](#move) instead.
+`RENAME [file] TO [newName]`
 
 ```ska
 %original = PATH /file.txt
 RENAME $(original) TO "renamed_file.txt"
+
 %originalExists = EXISTS $(original)
 %newExists = EXISTS /renamed_file.txt
+
 print(originalExists) # Prints "false"
 print(newExists) # Prints "true"
 ```
+
+> If you are attempting to move the folder use the [`MOVE` command](#move) instead. 

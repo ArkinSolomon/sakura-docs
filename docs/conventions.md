@@ -12,7 +12,7 @@ In the case of for-loops, if the iterable variable is to be ignored, the iterabl
 
 ## Function Definitions
 
-Functions should be defined at the bottom of the script. Function names should be short, descriptive, and use camelCase. Functions that return boolean values should start with something along the lines of "is", "has", or "does". Unlike boolean variable names, it is discouraged to name then as a verb with an "s" at the end. Functions should be limited to do one thing. Function argument names should follow variable naming conventions. 
+Functions should be defined at the bottom of the script. Function names should be short, descriptive, and use camelCase. Functions that return boolean values should start with something along the lines of "is", "has", or "does" (something phrased as a question). Unlike boolean variable names, it is discouraged to name then as a verb with an "s" at the end. Functions should be limited to do one thing. Function argument names should follow variable naming conventions. 
 
 Executor functions should ignore extraneous variable in fixed-length parameter functions. For instance, if your function only uses two parameter and a third parameter is passed, it should not throw an exception.
 
