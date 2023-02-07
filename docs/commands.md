@@ -206,6 +206,8 @@ print(originalExists) # Prints "false"
 print(newExists) # Prints "true"
 ```
 
+> Note that copying or moving files or directories moves all content to the specified directory. For instance moving `/dir1` to `/dir2` moves all content from `dir1` into `dir2`, while deleting `dir1` and it's children. It will overwrite all items in `dir2`. 
+
 ### RENAME
 
 Change the name of a file or directory. `newName` is the new name of the file, and can not contain strings. Slashes are not allowed in the new name. Requires READ permissions on `file`, and WRITE permissions on the target name (equivalent to `file/../newName`).
